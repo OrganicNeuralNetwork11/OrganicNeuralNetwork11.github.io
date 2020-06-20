@@ -80,6 +80,14 @@ img {
 	font-size: 50px;
 }
 
+.ytplayer {
+    position: absolute;
+    margin: auto;
+    left: 50%;
+    transform: translate(-50%, -10%);
+}
+
+
 </style>
 </head>
 <body>
@@ -380,6 +388,7 @@ img {
 
 	<script>
 	// Set the date we're counting down to
+	// https://education.nsw.gov.au/public-schools/going-to-a-public-school/calendars
 	var countDownDate = new Date("Sep 17, 2021 00:00:00").getTime();
 
 	// Update the count down every 1 second
@@ -409,6 +418,13 @@ img {
 	}, 1000);
 	</script>
 </div>
+
+<div class="ytplayer">
+	<h1> Some Music </h1>
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/_0SRrR5QowY?&autoplay=1" frameborder="0"></iframe>
+</div>
+
+
 
 </body>
 </html>
