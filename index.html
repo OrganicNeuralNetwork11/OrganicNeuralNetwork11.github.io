@@ -1,100 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-* {box-sizing: border-box;}
-body {font-family: Verdana, sans-serif;}
-.mySlides {display: none;}
-img {vertical-align: middle;}
-
-/* Slideshow container */
-.slideshow-container {
-  max-width: 1000px;
-  position: relative;
-  margin: auto;
-}
-
-
-/* The dots/bullets/indicators */
-.dot {
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background-color: #060d14;
-  border-radius: 50%;
-  display: inline-block;
-}
-
-
-/* Fading animation */
-.fade {
-  -webkit-animation-name: fade;
-  -webkit-animation-duration: 1.5s;
-  animation-name: fade;
-  animation-duration: 1.5s;
-}
-
-@-webkit-keyframes fade {
-  from {opacity: .4} 
-  to {opacity: 1}
-}
-
-@keyframes fade {
-  from {opacity: .4} 
-  to {opacity: 1}
-}
-
-/* On smaller screens, decrease text size */
-@media only screen and (max-width: 300px) {
-  .text {font-size: 11px}
-}
-
-
-/* Other */
-
-h1, h2, p {
-	text-align: center;
-	color: white;
-}
-
-body {
-	background-color: #060d14;
-}
-
-
-canvas {
-    padding: 0;
-    margin: auto;
-    display: block;
-    width: 500px;
-}
-	
-
-img {
-	width: 1100px;;
-	height: 700px;
-}
-
-#demo {
-	font-size: 50px;
-}
-
-.ytplayer {
-    position: absolute;
-    margin: auto;
-    left: 50%;
-    transform: translate(-50%, -10%);
-}
-
-
-</style>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 
-
 <div class="The title">
-<h1>Welcome to my website!</h1>
+	<h1>Welcome to my website!</h1>
 </div>
 
 <div class="Slideshow">
@@ -152,237 +65,12 @@ img {
 	</script>
 </div>
 
-<div class="Mini Atari Breakout">
 
-	<h1> Mini Atari Breakout </h1>
-	<p>Move mouse below to start!</p>
-	
-	<div class="canvas-container">
-		<canvas id="myCanvas" width="480" height="320" onmouseenter="draw()" onmouseleave="close()"></canvas>
-		
-		<script>
-			// JavaScript code goes here
-
-			// Game Variables
-			var canvas = document.getElementById("myCanvas");
-			var ctx = canvas.getContext("2d");
-			
-			// Ball Variables
-			var ballRadius = 10;
-			
-			// Map Variables
-			var x = canvas.width/2;
-			var y = canvas.height-30;
-			var dx = 2;
-			var dy = -2;
-			
-			// Player Variables
-			var paddleHeight = 10;
-			var paddleWidth = 75;
-			var paddleX = (canvas.width-paddleWidth)/2;
-			
-			// Controller Variables
-			var rightPressed = false;
-			var leftPressed = false;
-			
-			// Brick Variables
-			var brickRowCount = 3;
-			var brickColumnCount = 5;
-			var brickWidth = 75;
-			var brickHeight = 20;
-			var brickPadding = 10;
-			var brickOffsetTop = 30;
-			var brickOffsetLeft = 30;
-
-			// Score Variables
-			var score = 0;
-
-			// Lives Variables
-			var lives = 3;
-
-			// Event listeners for controller
-			document.addEventListener("keydown", keyDownHandler, false);
-			document.addEventListener("keyup", keyUpHandler, false);
-			
-
-			// Event handlers for controller
-			function keyDownHandler(e) {
-				if(e.key == "Right" || e.key == "ArrowRight") {
-					rightPressed = true;
-				}
-				else if(e.key == "Left" || e.key == "ArrowLeft") {
-					leftPressed = true;
-				}
-			}
-
-			function keyUpHandler(e) {
-				if(e.key == "Right" || e.key == "ArrowRight") {
-					rightPressed = false;
-				}
-				else if(e.key == "Left" || e.key == "ArrowLeft") {
-					leftPressed = false;
-				}
-			}
-
-			
-			// Brick drawing
-			function drawBricks() {
-				for(var c=0; c<brickColumnCount; c++) {
-					for(var r=0; r<brickRowCount; r++) {
-						if(bricks[c][r].status == 1) {
-							var brickX = (c*(brickWidth+brickPadding))+brickOffsetLeft;
-							var brickY = (r*(brickHeight+brickPadding))+brickOffsetTop;
-							bricks[c][r].x = brickX;
-							bricks[c][r].y = brickY;
-							ctx.beginPath();
-							ctx.rect(brickX, brickY, brickWidth, brickHeight);
-							ctx.fillStyle = "#0095DD";
-							ctx.fill();
-							ctx.closePath();
-						}
-					}
-				}
-			}
-
-			// Drawing Ball Element
-			function drawBall() {
-				ctx.beginPath();
-				ctx.arc(x, y, ballRadius, 0, Math.PI*2);
-				ctx.fillStyle = "#0095DD";
-				ctx.fill();
-				ctx.closePath();
-			}
-			
-			// Drawing Paddle Element
-			function drawPaddle() {
-				ctx.beginPath();
-				ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
-				ctx.fillStyle = "#0095DD";
-				ctx.fill();
-				ctx.closePath();
-			}
-
-			
-			// Brick array
-			var bricks = [];
-			for(var c=0; c<brickColumnCount; c++) {
-				bricks[c] = [];
-				for(var r=0; r<brickRowCount; r++) {
-					bricks[c][r] = { x: 0, y: 0 };
-				}
-			}
-			
-			// Checking brick status
-			var bricks = [];
-			for(var c=0; c<brickColumnCount; c++) {
-				bricks[c] = [];
-				for(var r=0; r<brickRowCount; r++) {
-					bricks[c][r] = { x: 0, y: 0, status: 1 };
-				}
-			}
-			
-			// Brick collision detection
-			function collisionDetection() {
-				for(var c=0; c<brickColumnCount; c++) {
-					for(var r=0; r<brickRowCount; r++) {
-						var b = bricks[c][r];
-						if(b.status == 1) {
-							if(x > b.x && x < b.x+brickWidth && y > b.y && y < b.y+brickHeight) {
-								dy = -dy;
-								b.status = 0;
-								score++;
-								if(score == brickRowCount*brickColumnCount) {
-									alert("YOU WIN, CONGRATULATIONS!");
-									document.location.reload();
-				
-								
-								}
-							}
-						}
-					}
-				}
-			}
-			
-			// Draw score
-			function drawScore() {
-				ctx.font = "16px Arial";
-				ctx.fillStyle = "#0095DD";
-				ctx.fillText("Score: "+score, 8, 20);
-			}
-			
-			// Lives
-			function drawLives() {
-				ctx.font = "16px Arial";
-				ctx.fillStyle = "#0095DD";
-				ctx.fillText("Lives: "+lives, canvas.width-65, 20);
-			}
-			
-			// Drawing ingame elements
-			function draw() {
-				ctx.clearRect(0, 0, canvas.width, canvas.height);
-				drawBricks();
-				drawBall();
-				drawPaddle();
-				collisionDetection();
-				drawScore();
-				drawLives();
-				
-				if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
-					dx = -dx;
-				
-				}
-
-				if(y + dy < ballRadius) {
-					dy = -dy;
-				} else if(y + dy > canvas.height-ballRadius) {
-					if(x > paddleX && x < paddleX + paddleWidth) {
-						dy = -dy;
-					}
-					else {
-						lives--;
-						if(!lives) {
-							alert("GAME OVER");
-							document.location.reload();
-							
-						}
-						else {
-							x = canvas.width/2;
-							y = canvas.height-30;
-							dx = 2;
-							dy = -2;
-							paddleX = (canvas.width-paddleWidth)/2;
-						}
-					}
-					
-					
-				}
-				
-				if(rightPressed) {
-					paddleX += 7;
-					if (paddleX + paddleWidth > canvas.width){
-						paddleX = canvas.width - paddleWidth;
-					}
-				}
-				else if(leftPressed) {
-					paddleX -= 7;
-					if (paddleX < 0){
-						paddleX = 0;
-					}
-				}
-				
-				x += dx;
-				y += dy;
-				requestAnimationFrame(draw);
-			}
-
-		</script>
-	</div>
+<div>
+	<h1> Time Until Graduation - 17th of September 2021</h1>
 </div>
 
-<h1> Time Until Graduation - 17th of September 2021</h1>
-
 <div class="timer">
-
 <!-- Display the countdown timer in an element -->
 <p id="demo"></p>
 
@@ -419,12 +107,14 @@ img {
 	</script>
 </div>
 
-<div class="ytplayer">
-	<h1> Some Music </h1>
-	<iframe width="560" height="315" src="https://www.youtube.com/embed/_0SRrR5QowY?&autoplay=1" frameborder="0"></iframe>
+
+<div class="nextPage">
+	<div class="center">
+		<form action="miniatari.html">
+			<input type="submit" value="Play Atari Breakout"/>
+		</form>
+	</div>
 </div>
-
-
 
 </body>
 </html>
